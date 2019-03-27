@@ -1,0 +1,8 @@
+<h1>Here are some results</h1>
+<% if (results == undefined) { %>
+No results found
+<%} else { %>
+<% results.forEach(function(result) { %>
+<li><%=result.Title%></li>
+<%});%>
+<%}%>
