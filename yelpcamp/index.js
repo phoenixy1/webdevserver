@@ -15,11 +15,20 @@ var campgroundSchema = new mongoose.Schema({
 
 var campground = mongoose.model("Campground", campgroundSchema);
 
+app.get("/campgrounds/:id", function(req, res) {
+    var id = req.params.id;
+    campground.findById(id, function(error, result) {
+        res.render("show", {campground:result})
+    });
+});
+
+
 app.get("/campgrounds", function(req, res) {
     campground.find({}, function(error, results) {
             res.render("campgrounds", {campgrounds:results})
     });
 });
+
 
 
 app.post("/campgrounds", function(req, res) {
