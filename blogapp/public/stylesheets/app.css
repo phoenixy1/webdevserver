@@ -1,0 +1,17 @@
+.icon {
+    font-size: 2em !important;
+}
+
+.bodycontainer {
+    margin-top: 70px !important;
+}
+
+.linkbutton {
+     background:none!important;
+     color:inherit;
+     border:none; 
+     padding:0!important;
+     font: inherit;
+     /*border is optional*/
+     cursor: pointer;
+}

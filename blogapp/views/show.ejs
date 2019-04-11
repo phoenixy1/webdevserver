@@ -1,0 +1,22 @@
+<%include partials/header%>
+<div class="bodycontainer ui main text container segment">
+<div class="ui huge header"><%=post.title%></div>
+<div class="ui top attached segment">
+    <div class="item">
+created by <%=post.author%>
+</div>
+</div>
+<div class="content">
+<div><%=post.body%></div>
+posted at <%=post.date.toDateString()%>
+</div>
+<div>
+<a href="/posts/<%=post.id%>/edit">Edit post</a>
+</div>
+<div>
+<form action = "/posts/<%=post.id%>?_method=DELETE" method="POST">
+    <a><button type = "submit" class="linkbutton" value="Delete post">Delete post</button></a>
+    </form>
+</div>
+</div>
+<%include partials/footer%>
