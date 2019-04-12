@@ -3,11 +3,13 @@ var mongoose = require("mongoose");
 var bodyParser = require("body-parser");
 var app = express();
 var methodOverride = require("method-override");
+var expressSanitizer = require("express-sanitizer");
 
 mongoose.connect("mongodb://localhost/blog_app");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public'))
 app.use(methodOverride("_method"));
+app.use(expressSanitizer());
 app.set("view engine", "ejs");
 
 var postSchema = new mongoose.Schema({
@@ -31,8 +33,9 @@ app.get("/posts/new", function(req, res) {
     });
     
 app.post("/posts", function(req, res) {
+    req.body.post.body = req.sanitize(req.body.post.body);
     post.create(req.body.post);
-        res.redirect("/posts");
+    res.redirect("/posts");
 });
 
 app.get("/posts/:id", function(req, res) {
@@ -48,6 +51,7 @@ app.get("/posts/:id/edit", function(req, res) {
 });
 
 app.put("/posts/:id", function(req, res) {
+    req.body.post.body = req.sanitize(req.body.post.body);
     post.findByIdAndUpdate(req.params.id, req.body.post, {new: true}, function(error, post) {
             res.redirect("/posts/"+req.params.id);
 

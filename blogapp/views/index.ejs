@@ -2,9 +2,9 @@
 <title>Blog index</title>
 <% posts.forEach(function(post) { %>
 <h2><%=post.title%></h2>
-by <%=post.author%><br>
-<div class = "postbody"><%=post.body.substring(0, 100)%></div>
-<div class= "postdate"><%=post.date%></div>
+by <%=post.author%>
+<div class = "postbody"><%-post.body.substring(0, 100)%></div>
+<div class= "postdate"><%=post.date.toDateString()%></div>
 <a href="/posts/<%=post.id%>">View more</a>
 <% });%>
 <%include partials/footer%>
