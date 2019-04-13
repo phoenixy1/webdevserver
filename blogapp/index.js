@@ -5,7 +5,8 @@ var app = express();
 var methodOverride = require("method-override");
 var expressSanitizer = require("express-sanitizer");
 
-mongoose.connect("mongodb://localhost/blog_app");
+mongoose.connect("mongodb+srv://admin:CorrectBatteryHorseStaple@freecluster-lse2a.mongodb.net/test?retryWrites=true");
+//mongoose.connect("mongodb://localhost/blog_app");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public'))
 app.use(methodOverride("_method"));
