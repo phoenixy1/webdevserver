@@ -1,0 +1,16 @@
+<%include ../partials/header%>
+
+<div class="card">
+        <div class="card-body">
+        <h4 class="card-title text-center"><%=campground.name%></h4>
+    <img class="card-img-bottom" src="<%=campground.img_url%>"></div>
+    <div class="card-text text-center"><%=campground.description%></div>
+    <%campground.comments.forEach(function(comment) {%>
+        <div class="card-text text-center"><%=comment.text%></div>
+        <div class="card-text text-center">posted by <%=comment.author%></div>
+    <%});%>
+    </div>
+    <a class="btn btn-primary" href="/campgrounds/<%=campground.id%>/comments/new">Add comment</a>
+
+
+<%include ../partials/footer%>
