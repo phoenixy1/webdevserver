@@ -1,9 +1,10 @@
 <%include ../partials/header%>
 <div class="container">
-<h1>Make a new comment</h1>
+<h1>Make a new comment on <%=campground.name%></h1>
   <div class="form-group mt-4">
 <form action = "/campgrounds/<%=campground.id%>/comments" method="POST" style="width: 30%">
-    <input type = "text" name = "author" id="author" class="form-control mb-2" placeholder="name">
+    <input type = "text" name = "author" id="author" class="form-control mb-2" 
+    value="<%=currentUser.username%>" readonly>
     <textarea name = "text" id="text" class="form-control mb-2" placeholder="comment"></textarea>
     <div class="text-center">
     <input type = "submit" class="form-control mt-4 btn btn-primary" style="width: 60%">
