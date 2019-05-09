@@ -1,13 +1,20 @@
 var express = require("express");
 var app = express();
+app.use(express.static('public'))
+
+
+var flash = require("connect-flash");
+app.use(flash());
 
 var bodyParser = require("body-parser");
-
 app.use(bodyParser.json()); 
 app.use(bodyParser.urlencoded({ extended: true }));
 
 var mongoose = require("mongoose");
 mongoose.connect("mongodb://localhost/yelp_camp");
+
+var methodOverride = require("method-override");
+app.use(methodOverride("_method"));
 
 var passport = require("passport");
 var LocalStrategy = require("passport-local");
@@ -17,8 +24,9 @@ var authRoutes = require("./routes/auth");
 var commentsRoutes  = require("./routes/comments");
 var campgroundsRoutes = require("./routes/campgrounds");
 
+
 var SeedDB = require("./seed.js");
-SeedDB();
+//SeedDB();
 
 app.set("view engine", "ejs");
 
@@ -39,6 +47,8 @@ passport.deserializeUser(User.deserializeUser());
 
 app.use(function(req, res, next) {
     res.locals.currentUser = req.user;
+    res.locals.error = req.flash("error");
+    res.locals.success = req.flash("success");
     next();
 });
 

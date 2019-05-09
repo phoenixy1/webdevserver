@@ -1,0 +1,16 @@
+<%include ../partials/header%>
+<div class="container">
+<h1>Edit a campsite</h1>
+<h2> No wait don't</h2>
+  <div class="form-group mt-4">
+<form action = "/campgrounds/<%=campground.id%>?_method=PUT" method="POST" style="width: 30%">
+    <input type = "text" name = "campground[name]" id="name" class="form-control mb-2" value="<%=campground.name%>">
+    <input type = "text" name = "campground[url]" id="url" class="form-control mb-2" value="<%=campground.img_url%>">
+    <input type = "text" name = "campground[description]" class="form-control" value="<%=campground.description%>">
+    <div class="text-center">
+    <input type = "submit" class="form-control mt-4 btn btn-primary" style="width: 60%">
+    </div>
+</form>
+</div>
+</div>
+<%include ../partials/footer%>

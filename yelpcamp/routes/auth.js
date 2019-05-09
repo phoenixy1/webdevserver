@@ -8,16 +8,18 @@ router.post("/register", function(req, res) {
     User.register(new User({username: req.body.username}), req.body.password, 
     function (error, user) {
         if (error) {
-            res.render("register", {error: error});
+            req.flash("error", error.message);
+            return res.render("register");
         }
         passport.authenticate("local")(req, res, function() {
+            req.flash("success", "Welcome, " + user.username)
             res.redirect("/campgrounds");
         });
     });
 });
 
 router.get("/register", function(req, res) {
-    res.render("register", {error:""});
+    res.render("register");
 });
 
 router.get("/login", function(req, res) {
@@ -35,12 +37,9 @@ router.get("/logout", function(req, res) {
     res.redirect("/login");
 });
 
+router.get("/", function(req, res) {
+    res.render("landing");
+});
 
-function isLoggedIn(req, res, next) {
-    if (req.isAuthenticated()) {
-        return next();
-    }
-    res.redirect("/login");
-}
 
 module.exports = router;

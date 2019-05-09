@@ -1,16 +1,29 @@
 <%include ../partials/header%>
-
 <div class="card">
         <div class="card-body">
         <h4 class="card-title text-center"><%=campground.name%></h4>
     <img class="card-img-bottom" src="<%=campground.img_url%>"></div>
     <div class="card-text text-center"><%=campground.description%></div>
+    <div class="card-text text-center"> submitted by <%=campground.author.username%></div>
     <%campground.comments.forEach(function(comment) {%>
         <div class="card-text text-center"><%=comment.text%></div>
-        <div class="card-text text-center">posted by <%=comment.author%></div>
+        <div class="card-text text-center">posted by <%=comment.author.username%></div>
+        <%if (currentUser && comment.author.id.equals(currentUser.id)) {%>
+        <a class="btn btn-secondary" href="/campgrounds/<%=campground.id%>/comments/<%=comment.id%>/edit">Edit comment</a>
+        <form id="delete-form" action="/campgrounds/<%=campground.id%>/comments/<%=comment.id%>?_method=DELETE" method="POST">
+            <button class="btn btn-danger">Delete comment</button>
+         </form>
+         <%}%>
+        
     <%});%>
     </div>
     <a class="btn btn-primary" href="/campgrounds/<%=campground.id%>/comments/new">Add comment</a>
+    <%if (currentUser && campground.author.id.equals(currentUser.id)) {%>
+        <a class="btn btn-secondary" href="/campgrounds/<%=campground.id%>/edit">Edit campground</a>
+        <form id="delete-form" action="/campgrounds/<%=campground.id%>/?_method=DELETE" method="POST">
+            <button class="btn btn-danger">Delete campground</button>
+         </form>
+    <%}%>
 
 
 <%include ../partials/footer%>
